@@ -13,4 +13,6 @@ interface WebDriver {
     fun findElements(by: By): List<WebElement>
 
     fun getPageSource(): String
+
+    fun executeScript(script: String): Any?
 }

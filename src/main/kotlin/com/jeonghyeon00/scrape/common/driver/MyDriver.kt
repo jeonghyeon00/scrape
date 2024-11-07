@@ -34,4 +34,8 @@ class MyDriver: WebDriver {
     override fun getPageSource(): String {
         return driver.pageSource
     }
+
+    override fun executeScript(script: String): Any? {
+        return driver.executeScript(script)
+    }
 }

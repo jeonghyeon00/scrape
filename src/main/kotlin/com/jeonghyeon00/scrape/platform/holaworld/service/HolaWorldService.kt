@@ -4,6 +4,7 @@ import com.jeonghyeon00.scrape.platform.holaworld.entity.HolaWorldStudy
 import com.jeonghyeon00.scrape.platform.holaworld.repository.HolaWorldStudyRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class HolaWorldService(
@@ -11,6 +12,7 @@ class HolaWorldService(
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
+    @Transactional
     fun saveStudies(studies: List<HolaWorldStudy>) {
         if (studies.isEmpty()) return
 
