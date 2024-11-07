@@ -18,7 +18,10 @@ class HolaWorldStudy(
     val roles: String,
 
     @Column(name = "hola_world_study_id", unique = true)
-    val holaWorldStudyId: String
+    val holaWorldStudyId: String,
+
+    @Column(name = "technologies")
+    val technologies: String
 ): BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

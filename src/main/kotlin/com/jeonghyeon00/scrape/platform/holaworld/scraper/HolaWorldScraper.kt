@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 @Service
 class HolaWorldScraper(
     private val holaWorldService: HolaWorldService
-): DisposableBean {
+) : DisposableBean {
     private val logger = LoggerFactory.getLogger(this::class.java)
     private lateinit var driver: WebDriver
 
@@ -46,8 +46,19 @@ class HolaWorldScraper(
             val title = element.findElement(By.tagName("h1")).text
             val positionElements = element.findElements(By.className("studyItem_position__2sRRD"))
             val roles = positionElements.joinToString(", ") { it.text }
+            val technologyElements = element.findElement(By.className("studyItem_content__1mJ9M")).findElements(By.className("studyItem_language__20yqw"))
+            val technologies = technologyElements.joinToString(", ") {
+                it.findElement(By.tagName("img")).getAttribute("title")
+            }
             val holaWorldStudyId = element.getAttribute("href").removePrefix("https://holaworld.io/study/")
-            holaWorldStudies.add(HolaWorldStudy(title = title, roles = roles, holaWorldStudyId = holaWorldStudyId))
+            holaWorldStudies.add(
+                HolaWorldStudy(
+                    title = title,
+                    roles = roles,
+                    holaWorldStudyId = holaWorldStudyId,
+                    technologies = technologies
+                )
+            )
         }
         return holaWorldStudies
     }
